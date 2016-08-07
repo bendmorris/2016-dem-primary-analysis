@@ -13,7 +13,8 @@ FROM primary_results r
 LEFT JOIN county_facts c ON c.state_abbreviation = r.state_abbreviation AND c.area_name = r.county || ' County'
 WHERE r.state_abbreviation = '{}' AND r.party = 'Democrat'
 GROUP BY r.state, r.county, c.PST045214
-ORDER BY c.PST045214;'''
+HAVING total_votes > 0
+ORDER BY total_votes;'''
 
 query = query.format(state_abbreviation)
 
